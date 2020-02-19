@@ -1,6 +1,7 @@
 <?php 
+	session_start();
 	if (!isset($_SESSION['user'])) {
-		header("location: ../index.php");
+		header("location: index.php");
 	}
  ?>
 <!DOCTYPE html>
@@ -10,6 +11,10 @@
 	<meta charset="utf-8">
 </head>
 <body>
+	<div>
+		<div style="font-size: 20px;">Hello, <span style="font-style: italic;"><?php echo $_SESSION['user'] ?></span></div>
+		<div><a href="views/logout.php"><button>Log out</button></a></div>
+	</div>
 	<div align="center">
 		<div style="margin-top: 50px;"><h2 style="text-transform: uppercase;letter-spacing: 2px;">Add product</h2></div>
 		<div style="margin-top: 50px;">

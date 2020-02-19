@@ -1,8 +1,9 @@
 <?php 
-	if (!isset($_SESSION['user'])) {
-		header("location: ../index.php");
-	}
+	session_start();
+
+
  ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,14 +11,16 @@
 </head>
 <body>
 	<div>
-		<table>
+		<!-- <table>
 			<tr>
 				<td><h3><?php echo $_SESSION['user'] ?></h3></td>
 				<td></td>
 				<td></td>
 				<td><a href="views/logout.php"><button>Log out</button></a></td>
 			</tr>
-		</table>
+		</table> -->
+		<div style="font-size: 20px;">Hello, <span style="font-style: italic;"><?php echo $_SESSION['user'] ?></span></div>
+		<div><a href="views/logout.php"><button>Log out</button></a></div>
 	</div>
 	<div align="center" style="font-size: 17px;letter-spacing: 1px;" >
 		<div style="margin-top: 50px;"><h2 style="text-transform: uppercase;letter-spacing: 2px;">All products</h2></div>
@@ -37,15 +40,15 @@
 						<td><?php echo $product['p_name']; ?></td>
 						<td><?php echo $product['p_category']; ?></td>
 						<td><?php echo $product['p_producer']; ?></td>
-						<td><a href="index.php?f=edit&id=<?php echo $product['p_id']; ?>" style="color: red;">Edit</a></td>
-						<td><a href="index.php?f=delete&id=<?php echo $product['p_id']; ?>" style="color: blue;">Delete</a></td>
+						<td><a href="index.php?c=product&f=edit&id=<?php echo $product['p_id']; ?>" style="color: red;">Edit</a></td>
+						<td><a href="index.php?c=product&f=delete&id=<?php echo $product['p_id']; ?>" style="color: blue;">Delete</a></td>
 					</tr>
 				<?php } ?>
 			</table>
 		</div>
 		<div style="margin-top: 50px;">
 			<a href="index.php"><button>Home</button></a>
-			<a href="index.php?f=add"><button>Add product</button></a>
+			<a href="index.php?c=product&f=add"><button>Add product</button></a>
 		</div>
 	</div>
 </body>

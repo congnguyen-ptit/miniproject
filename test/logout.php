@@ -1,6 +1,8 @@
 <?php   
- //logout.php  
  session_start();  
  session_destroy();  
- header("location:login.php");  
+ if (isset($_COOKIE['usercookie'])) {
+ 	setcookie('usercookie',time()-600);
+ }
+ header("location: login.php");  
  ?>  

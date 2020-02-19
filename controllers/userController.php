@@ -1,4 +1,5 @@
 <?php 
+	session_start();
 	class UserController{
 		private $user;
 		function __construct()
@@ -7,9 +8,8 @@
 			$this->user = new User();
 		}
 		public function LoginProcess(){
-			//kiem tra session vva cookie
 			if(isset($_SESSION['user'])){
-				header("location: index.php");
+				header("location: index.php?c=product");
 				exit();
 			} elseif(isset($_COOKIE['usercookie'])){
 				$uc = $_COOKIE['usercookie'];
@@ -17,7 +17,7 @@
 				$count = $u['cnt'];
 				if($count == 1){
 					$_SESSION['user'] = $uc;
-					header("location: index.php");
+					header("location: index.php?c=product");
 					exit();
 				}
 			}
@@ -32,18 +32,20 @@
 					if($count == 1){
 						if (isset($_POST['remember'])) {
 							setcookie('usercookie',$row['username'],time()+600);
-							// setcookie('usercookie',$row['username'],-1);
 						}
 						$_SESSION['user'] = $row['username'];
-						header("location: index.php");
+						header("location: index.php?c=product");
 						exit();
 					}
 					else{
 						$err = "Incorrect Username or Password";
+						require_once("views/login.php");
 					}
 				}
+			} else {
+				$err = "Login first";
+				require_once("views/login.php");
 			}
-			include("views/login.php");
 		}
 	}
 	function check_input($input){
@@ -52,9 +54,5 @@
 		$input = stripslashes($input);
 		return $input;
 	}
-	// function sessionSecure($lifetime, $path, $domain, $secure, $httpOnly){
-	// 	session_set_cookie_params($lifetime,$path,$domain,$secure,$httpOnly);
-	// 	session_start();
-	// }
-
+	
  ?>

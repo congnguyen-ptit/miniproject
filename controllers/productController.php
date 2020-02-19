@@ -35,7 +35,7 @@
 							}
 							if(!empty($_POST['name']) && !empty($_POST['category']) && !empty($_POST['producer'])){
 								$this->product->addProduct($name,$category,$producer);
-								header('location: index.php');
+								header('location: index.php?c=product');
 							}
 						}
 						include "views/addproduct.php";
@@ -62,7 +62,7 @@
 							}
 							if(!empty($_POST['name']) && !empty($_POST['category']) && !empty($_POST['producer'])){
 								$this->product->editProduct(htmlspecialchars(strip_tags($_GET['id'])),$name,$category,$producer);
-								header('location: index.php');
+								header('location: index.php?c=product');
 							}
 						}
 						include "views/editproduct.php";
@@ -70,12 +70,18 @@
 
 					case 'delete':
 						$this->product->deleteProduct(htmlspecialchars(strip_tags($_GET['id'])));
-						header('location: index.php');
+						header('location: index.php?c=product');
 						break;	
 
 				}
 			}
 		}
+	}
+	function check_input($input){
+		$input = trim($input);
+		$input = htmlspecialchars($input);
+		$input = stripslashes($input);
+		return $input;
 	}
 
  ?>
